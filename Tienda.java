@@ -19,23 +19,17 @@ public class Tienda {
                 System.out.print("¿Cuántas unidades desea comprar? ");
                 int cantidad = sc.nextInt();
 
-                String nombre = switch (opcion) {
-                    case 1 -> "Camisetas";
-                    case 2 -> "Pantalones";
-                    case 3 -> "Chaquetas";
-                    default -> "";
+                Producto producto = switch (opcion) {
+                    case 1 -> new Producto("Camisetas", 25000);
+                    case 2 -> new Producto("Pantalones", 45000);
+                    case 3 -> new Producto("Chaquetas", 65000);
+                    default -> null;
                 };
 
-                double precio = switch (opcion) {
-                    case 1 -> 25000;
-                    case 2 -> 45000;
-                    case 3 -> 65000;
-                    default -> 0;
-                };
+                Compra compra = new Compra(producto, cantidad);
+                compra.imprimirResumen();
+                totalGeneral += compra.calcularTotal();
 
-                Producto producto = new Producto(nombre, precio, cantidad);
-                producto.imprimirResumen();
-                totalGeneral += producto.getTotal();
             } else if (opcion != 4) {
                 System.out.println("Opción inválida.");
             }
